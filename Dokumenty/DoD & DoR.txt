@@ -1,0 +1,9 @@
+DoR - co je treba splnit, aby ukol mohl byt resen
+* pochopit uzivatelsky pribeh
+* uvedomit jake technicke nastroje a sluzby budeme potrebovat
+
+DoD - za jakych podminek lze ukol oznacit jako dokonceny
+* kod je napsan a okomentovan 
+* aktulizovana dokumentace
+* proslo uspesne testovani 
+* probehla demonstrace zakaznikovi - zakaznik je spokojen
