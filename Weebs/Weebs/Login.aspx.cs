@@ -60,6 +60,13 @@ public partial class Admin : System.Web.UI.Page
                         Session["name"] = name;
                         Response.Redirect("/Autor.aspx");
                     }
+                    else if (sqdt.Rows[i]["Role"].ToString() == "Redaktor")
+                    {
+
+                        string name = Login_textbox.Text.Trim();
+                        Session["name"] = name;
+                        Response.Redirect("/Redaktor.aspx");
+                    }
 
                 }
             }
