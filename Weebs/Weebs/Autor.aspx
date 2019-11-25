@@ -17,9 +17,11 @@
         <hr />  
         <asp:GridView ID="GridView1" runat="server"   
               
-            AutoGenerateColumns="false" CssClass="table">  
+            AutoGenerateColumns="False" CssClass="table">  
             <Columns>  
-                <asp:BoundField DataField="Nazev" HeaderText="Nazev" />  
+                <asp:BoundField DataField="Nazev" HeaderText="Nazev" /> 
+                <asp:BoundField DataField="Jmeno" HeaderText="Jmeno" />
+                <asp:BoundField DataField="Verze" HeaderText="Verze" />
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
                     <ItemTemplate>  
                         <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
