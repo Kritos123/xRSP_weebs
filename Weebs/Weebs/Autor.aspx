@@ -19,7 +19,7 @@
               
             AutoGenerateColumns="false" CssClass="table">  
             <Columns>  
-                <asp:BoundField DataField="Nazev" HeaderText="Nazev" />  
+                <asp:BoundField DataField="Nazev" HeaderText="File Name" />  
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
                     <ItemTemplate>  
                         <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  

@@ -15,7 +15,7 @@ public partial class Autor : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-           connect();
+            connect();
 
         }
     }
@@ -40,27 +40,28 @@ public partial class Autor : System.Web.UI.Page
         SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
         DataTable sqdt = new DataTable();
         sqlda.Fill(sqdt);
-        for (int i = 0; i < sqdt.Rows.Count; i++)
-        {
-            if (sqdt.Rows[i]["UserName"].ToString() == Name)
+            for (int i = 0; i < sqdt.Rows.Count; i++)
             {
-                if (sqdt.Rows[i]["Role"].ToString() == "Autor")
+                if (sqdt.Rows[i]["UserName"].ToString() == Name)
                 {
-                    Bind();
+                    if (sqdt.Rows[i]["Role"].ToString() == "Autor")
+                    {
+                        Bind();
                     break;
+                    }
+                    else if (sqdt.Rows[i]["Role"].ToString() != "Autor")
+                    {
+                        Response.Redirect("/Login.aspx");
+                    }
                 }
-                else 
+                else if ((sqdt.Rows[i]["UserName"].ToString() != Name) &&(i== sqdt.Rows.Count))
                 {
                     Response.Redirect("/Login.aspx");
                 }
+                
             }
-            else if ((sqdt.Rows[i]["UserName"].ToString() != Name) && (i == sqdt.Rows.Count))
-            {
-                Response.Redirect("/Login.aspx");
-            }
-
-        }
-        
+        Session["name"] = null;
+        Name = null;
 
 
     }
@@ -92,7 +93,7 @@ public partial class Autor : System.Web.UI.Page
                 string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    string query = "insert into Clanky (Nazev, Typ, Data) values (@Nazev, @Typ, @Data)";
+                    string query = "insert into Clanky values (@Nazev, @Typ, @Data)";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
                         cmd.Connection = con;
@@ -145,10 +146,6 @@ public partial class Autor : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string Name = (string)(Session["name"]);
-
-        Session["name"] = null;
-        Name = null;
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("/Login.aspx");
