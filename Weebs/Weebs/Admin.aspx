@@ -5,22 +5,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <style type="text/css">
-        #form1 {
-            height: 379px;
-        }
-    </style>
+    <title>Admin page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body  style="background-color:#4F7D82">
+<body>
     <form id="form1" runat="server">
     <p>
         Admin page</p>
-        <asp:Image ID="Image1" runat="server" ImageUrl="~/Admin.png" style="position: relative; top: 0px; left: 0px; height: 75px; width: 378px" />
-        <asp:Button ID="Button1" runat="server" BackColor="#00CCFF" BorderColor="White" Font-Size="X-Large" OnClick="Button1_Click" style="position: relative; top: 73px; left: -305px; width: 208px; height: 63px" Text="Logout" />
+        
+        <asp:Button ID="Button1" runat="server" Text="Users" Width="96px" OnClick="Button1_Click" />
+&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button2" runat="server" Text="Articles" Width="100px" OnClick="Button2_Click" />
+    
     </form>
-    <hr style="color: #FFFFFF; background-color: #FFFFFF; position: relative; top: -205px; left: 1px;" />
 
+    <div>
 
-</body>
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+
+    </div>
+    
+    <div>
+        <asp:Table class="table table-striped" ID="tabel1" runat="server">
+
+        </asp:Table>
+    </div>
+    
+
+    </body>
 </html>

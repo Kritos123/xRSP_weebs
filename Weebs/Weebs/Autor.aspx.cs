@@ -15,7 +15,7 @@ public partial class Autor : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-           connect();
+            connect();
 
         }
     }
@@ -40,27 +40,28 @@ public partial class Autor : System.Web.UI.Page
         SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
         DataTable sqdt = new DataTable();
         sqlda.Fill(sqdt);
-        for (int i = 0; i < sqdt.Rows.Count; i++)
-        {
-            if (sqdt.Rows[i]["UserName"].ToString() == Name)
+            for (int i = 0; i < sqdt.Rows.Count; i++)
             {
-                if (sqdt.Rows[i]["Role"].ToString() == "Autor")
+                if (sqdt.Rows[i]["UserName"].ToString() == Name)
                 {
-                    Bind();
+                    if (sqdt.Rows[i]["Role"].ToString() == "Autor")
+                    {
+                        Bind();
                     break;
+                    }
+                    else if (sqdt.Rows[i]["Role"].ToString() != "Autor")
+                    {
+                        Response.Redirect("/Login.aspx");
+                    }
                 }
-                else 
+                else if ((sqdt.Rows[i]["UserName"].ToString() != Name) &&(i== sqdt.Rows.Count))
                 {
                     Response.Redirect("/Login.aspx");
                 }
+                
             }
-            else if ((sqdt.Rows[i]["UserName"].ToString() != Name) && (i == sqdt.Rows.Count))
-            {
-                Response.Redirect("/Login.aspx");
-            }
-
-        }
-        
+        Session["name"] = null;
+        Name = null;
 
 
     }
@@ -71,7 +72,7 @@ public partial class Autor : System.Web.UI.Page
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Id, Jmeno, Nazev, Verze from Clanky";
+                cmd.CommandText = "select Id, Nazev from Clanky";
                 cmd.Connection = con;
                 con.Open();
                 GridView1.DataSource = cmd.ExecuteReader();
@@ -92,47 +93,13 @@ public partial class Autor : System.Web.UI.Page
                 string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-
-                    string query = "insert into Clanky (Nazev, Typ, Data) values (@Nazev, @Typ, @Data)";
+                    string query = "insert into Clanky values (@Nazev, @Typ, @Data)";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
-
-                       
-
-                        string number = "0";
-                        int numba = 0;
-                        SqlCommand cm = new SqlCommand("select Nazev,Verze from Clanky ORDER BY id DESC", con);
-                        con.Open();
-
-                        try
-                        {
-                            SqlDataReader myReader = cm.ExecuteReader();
-
-                            while (myReader.Read())
-                            {
-                                if (myReader.GetString(0) == soubor)
-                                {
-                                    numba = myReader.GetInt32(1);
-                                    break;
-                                }
-
-                            }
-                            numba++;
-                            number = Convert.ToString(numba);
-                            con.Close();
-                        }
-                        catch (Exception er)
-                        {
-                            numba = 1;
-                        }
-
-
-                        cmd.CommandText = "insert into Clanky (Nazev, Typ, Data, Verze) values (@Nazev, @Typ, @Data, @Verze)";
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@Nazev", soubor);
                         cmd.Parameters.AddWithValue("@Typ", typ);
                         cmd.Parameters.AddWithValue("@Data", bytes);
-                        cmd.Parameters.AddWithValue("@Verze", number);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
@@ -146,13 +113,13 @@ public partial class Autor : System.Web.UI.Page
     {
         int id = int.Parse((sender as LinkButton).CommandArgument);
         byte[] bytes;
-        string soubor, typ, autor, verze;
+        string soubor, typ;
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Nazev, Data, Typ, Jmeno, Verze from Clanky where Id=@Id";
+                cmd.CommandText = "select Nazev, Data, Typ from Clanky where Id=@Id";
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Connection = con;
                 con.Open();
@@ -162,8 +129,6 @@ public partial class Autor : System.Web.UI.Page
                     bytes = (byte[])sdr["Data"];
                     typ = sdr["Typ"].ToString();
                     soubor = sdr["Nazev"].ToString();
-                    autor = sdr["Jmeno"].ToString(); // ----------
-                    verze = sdr["Verze"].ToString(); // ----------
                 }
                 con.Close();
             }
@@ -173,7 +138,7 @@ public partial class Autor : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = typ;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor + autor + verze); // ----------
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
@@ -181,10 +146,6 @@ public partial class Autor : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string Name = (string)(Session["name"]);
-
-        Session["name"] = null;
-        Name = null;
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("/Login.aspx");
