@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Autor : System.Web.UI.Page
+public partial class Redaktor : System.Web.UI.Page
 {
+    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-           connect();
-
+            connect();
         }
     }
     private void connect()
@@ -44,12 +44,12 @@ public partial class Autor : System.Web.UI.Page
         {
             if (sqdt.Rows[i]["UserName"].ToString() == Name)
             {
-                if (sqdt.Rows[i]["Role"].ToString() == "Autor")
+                if (sqdt.Rows[i]["Role"].ToString() == "Redaktor")
                 {
                     Bind();
                     break;
                 }
-                else 
+                else
                 {
                     Response.Redirect("/Login.aspx");
                 }
@@ -60,18 +60,15 @@ public partial class Autor : System.Web.UI.Page
             }
 
         }
-        
-
-
     }
-    private void Bind()
+        protected void Bind()
     {
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Id, Nazev from Clanky";
+                cmd.CommandText = "select Id,Nazev,Zkontroloval,Status,Vyjadreni from Clanky";
                 cmd.Connection = con;
                 con.Open();
                 GridView1.DataSource = cmd.ExecuteReader();
@@ -80,33 +77,46 @@ public partial class Autor : System.Web.UI.Page
             }
         }
     }
-    protected void Upload(object sender, EventArgs e)
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        string soubor = Path.GetFileName(FileUpload1.PostedFile.FileName);
-        string typ = FileUpload1.PostedFile.ContentType;
-        using (Stream f_s = FileUpload1.PostedFile.InputStream)
-        {
-            using (BinaryReader b_r = new BinaryReader(f_s))
-            {
-                byte[] bytes = b_r.ReadBytes((Int32)f_s.Length);
-                string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
-                {
-                    string query = "insert into Clanky (Nazev, Typ, Data) values (@Nazev, @Typ, @Data)";
-                    using (SqlCommand cmd = new SqlCommand(query))
-                    {
-                        cmd.Connection = con;
-                        cmd.Parameters.AddWithValue("@Nazev", soubor);
-                        cmd.Parameters.AddWithValue("@Typ", typ);
-                        cmd.Parameters.AddWithValue("@Data", bytes);
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-                    }
-                }
-            }
-        }
-        Response.Redirect(Request.Url.AbsoluteUri);
+        GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+        Label lbldeleteid = (Label)row.FindControl("lblID");
+        con.Open();
+        SqlCommand cmd = new SqlCommand("delete FROM clanky where id='" + Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString()) + "'", con);
+        cmd.ExecuteNonQuery();
+        con.Close();
+        Bind();
+    }
+    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GridView1.EditIndex = e.NewEditIndex;
+        Bind();
+    }
+    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        int userid = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+        Label lblID = (Label)row.FindControl("lblID"); 
+        TextBox zkontroloval = (TextBox)row.Cells[2].Controls[0];
+        TextBox status = (TextBox)row.Cells[3].Controls[0];
+        TextBox Vyjadril = (TextBox)row.Cells[4].Controls[0];
+        GridView1.EditIndex = -1;
+        con.Open();
+        SqlCommand cmd = new SqlCommand("update Clanky set Zkontroloval='" + zkontroloval.Text + "',Status='" + status.Text + "',Vyjadreni='" + Vyjadril.Text + "'where id='" + userid + "'", con);
+        cmd.ExecuteNonQuery();
+        con.Close();
+        Bind();
+         
+    }
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        Bind();
+    }
+    protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        GridView1.EditIndex = -1;
+        Bind();
     }
     protected void DownloadFile(object sender, EventArgs e)
     {
@@ -142,15 +152,18 @@ public partial class Autor : System.Web.UI.Page
         Response.Flush();
         Response.End();
     }
+    
+
+  
 
     protected void Button1_Click(object sender, EventArgs e)
     {
         string Name = (string)(Session["name"]);
-
         Session["name"] = null;
         Name = null;
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("/Login.aspx");
+
     }
 }  
