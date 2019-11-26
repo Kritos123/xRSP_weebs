@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body>
+<body style="background-color:#4F7D82">
     <form id="form1" runat="server">
         Zaregistrovat nového uživatele<br />
         <br />

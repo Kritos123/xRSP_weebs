@@ -74,7 +74,13 @@ public partial class Admin : System.Web.UI.Page
                         Session["name"] = name;
                         Response.Redirect("/Recenzent.aspx");
                     }
-
+                    else if (sqdt.Rows[i]["Role"].ToString() == "Administrator")
+                    {
+                        string name = Login_textbox.Text.Trim();
+                        Session["name"] = name;
+                        Session["role"] = "admin";
+                        Response.Redirect("/Admin.aspx");
+                    }
                 }
             }
             

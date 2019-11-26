@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body style="background-color:#4F7D82">
     <form id="form1" runat="server">
         <asp:Label ID="Label1" runat="server" Font-Size="25pt" Text="Label"></asp:Label>
         <br />
