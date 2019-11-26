@@ -11,4 +11,14 @@ public partial class Admin : System.Web.UI.Page
     {
 
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        string Name = (string)(Session["name"]);
+        Session["name"] = null;
+        Name = null;
+        var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+        authenticationManager.SignOut();
+        Response.Redirect("/Login.aspx");
+    }
 }
