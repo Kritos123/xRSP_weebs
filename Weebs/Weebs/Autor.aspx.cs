@@ -82,6 +82,7 @@ public partial class Autor : System.Web.UI.Page
     }
     protected void Upload(object sender, EventArgs e)
     {
+        int i = 0;
         string soubor = Path.GetFileName(FileUpload1.PostedFile.FileName);
         string typ = FileUpload1.PostedFile.ContentType;
         using (Stream f_s = FileUpload1.PostedFile.InputStream)
@@ -136,6 +137,7 @@ public partial class Autor : System.Web.UI.Page
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
+                        Session["zapis"] = ++i;
                     }
                 }
             }
@@ -188,5 +190,44 @@ public partial class Autor : System.Web.UI.Page
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("/Login.aspx");
+    }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        int c = 0;
+        string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        SqlConnection con = new SqlConnection(constr);
+        SqlCommand cmd = new SqlCommand();
+        SqlCommand cm = new SqlCommand("Select * from Clanky");
+        SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
+        DataTable sqdt = new DataTable();
+        sqlda.Fill(sqdt);
+        for (int i = 0; i < sqdt.Rows.Count; i++)
+        {
+            if (sqdt.Rows[i]["Nazev"].ToString() == TextBox1.Text)
+            {
+                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev) values (@Nazev_stiznosti, @Stiznost, @Nazev)";
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@Nazev_stiznosti", TextBox2.Text);
+                cmd.Parameters.AddWithValue("@Stiznost", TextBox3.Text);
+                cmd.Parameters.AddWithValue("@Nazev", TextBox1.Text);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Response.Write("Stiznost ulozena");
+                c++;
+                break;
+            }
+            else 
+            {
+                
+            }
+        }
+        if(c==0)
+        Response.Write("Neexistujici clanek");
+    }
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }  
