@@ -68,6 +68,10 @@ public partial class Redaktor : System.Web.UI.Page
     }
         protected void Bind()
     {
+        int zap = (int)(Session["zapis"]);
+        Response.Write("POcet nových zapisů:"+zap);
+        //zap = 0;
+       // Session["zapis"] = 0;
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {

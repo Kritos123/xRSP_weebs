@@ -16,7 +16,7 @@
         .table {
             position: relative;
             top: 104px;
-            left: 204px;
+            left: 286px;
             width: 784px;
         }
     </style>
@@ -28,7 +28,6 @@
         <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" CssClass="btn-primary" />  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#00CCFF" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: 58px; left: -629px; height: 37px; width: 119px" />
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Autor.png" style="position: relative; top: 13px; left: -748px; height: 38px; width: 122px" />
             <hr style="position: relative; top: 108px; left: 0px; background-color: #FFFFFF; color: #FFFFFF;" />
             <hr style="position: relative; top: 42px; left: 0px; margin-top: 7px; background-color: #FFFFFF; color: #FFFFFF;" />
         <asp:GridView ID="GridView1" runat="server"   
@@ -43,9 +42,25 @@
                         <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
                             CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>  
                     </ItemTemplate>  
-                </asp:TemplateField>  
+                </asp:TemplateField>
+                 
             </Columns>  
         </asp:GridView>  
+            &nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="Nazev"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            &nbsp;&nbsp;<br />
+            &nbsp;
+            <asp:Label ID="Label1" runat="server" Text="Nazev stiznosti"></asp:Label>
+&nbsp;<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;
+            <asp:Label ID="Label2" runat="server" Text="Stiznost"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+        &nbsp;&nbsp;<br />
+            &nbsp;&nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Submit" />
+          
         </div>
     </form>
 </body>
