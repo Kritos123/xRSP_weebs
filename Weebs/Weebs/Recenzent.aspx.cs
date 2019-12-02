@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,9 +10,13 @@ using System.Web.UI.WebControls;
 
 public partial class Recenzent : System.Web.UI.Page
 {
+     string thisUserId = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         connect();
+        MyArticles(); 
+        //Response.Write("<script>alert('"+thisUserId+"')</script>");
+        //  GridView1.;
     }
     private void connect()
     {
@@ -39,7 +44,7 @@ public partial class Recenzent : System.Web.UI.Page
             {
                 if (sqdt.Rows[i]["Role"].ToString() == "Recenzent")
                 {
-                    
+                    thisUserId = sqdt.Rows[i]["id"].ToString();
                     break;
                 }
                 else
@@ -67,6 +72,25 @@ public partial class Recenzent : System.Web.UI.Page
         Response.Redirect("/Login.aspx");
     }
 
+    void MyArticles()
+    {   
+        string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select * from Clanky_recenzenti where Recenzent1Id ='"+ thisUserId + "' OR Recenzent2Id='" + thisUserId+"'";
+                cmd.Connection = con;
+                con.Open();
+
+                DropDownList1.DataSource = cmd.ExecuteReader();
+                DropDownList1.DataTextField = "IdClanku";
+                DropDownList1.DataValueField = "IdClanku";
+                DropDownList1.DataBind();
+                con.Close(); 
+            }
+        }
+    }
 
 
 
@@ -79,5 +103,14 @@ public partial class Recenzent : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
 
+    }
+
+
+    protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        int idClanku = Convert.ToInt32(DropDownList1.SelectedItem.Text);
+
+        string message = DropDownList1.SelectedItem.Text + " - " + DropDownList1.SelectedItem.Value;
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
     }
 }

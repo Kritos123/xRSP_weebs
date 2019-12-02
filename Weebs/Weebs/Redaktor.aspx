@@ -5,17 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <style type="text/css">
-        #form1 {
-            height: 471px;
-        }
-    </style>
+    <title>Stránka redaktora</title>
+
 </head>
 <body  style="background-color:#4F7D82" ); >
     <form id="form1" runat="server">
-        <div>
-             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="id" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" ForeColor="White" style="position: relative; top: 245px; left: 305px; width: 876px; margin-top: 1px;">  
+        
+        <div style= "width:100%; min-height: 300px " >
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Redaktor.png"  /> 
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#0099CC" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: -30px; left: 33px; height: 54px; width: 217px" />
+
+
+            <div>
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="id" OnPageIndexChanging="GridView1_PageIndexChanging" 
+                              OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" 
+                              OnRowUpdating="GridView1_RowUpdating" ForeColor="White" >  
+                    <%-- style="position: relative; top: 245px; left: 305px; width: 876px; margin-top: 1px;" --%>
                     <Columns>  
                         <asp:BoundField DataField="id" HeaderText="Id." /> 
                         <asp:BoundField DataField="Nazev" HeaderText="Název" />  
@@ -26,20 +31,64 @@
                         <asp:CommandField ShowEditButton="true" />  
                         <asp:CommandField ShowDeleteButton="true" />
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
-                    <ItemTemplate>  
-                        <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
-                            CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>  
-                    </ItemTemplate>  
+                            <ItemTemplate>  
+                                <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
+                                                CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>  
+                            </ItemTemplate>  
 
-<ItemStyle HorizontalAlign="Center"></ItemStyle>
-                </asp:TemplateField> 
+                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                        </asp:TemplateField> 
                     </Columns>  
                     <RowStyle BorderColor="White" />
                 </asp:GridView>  
-             <asp:Image ID="Image1" runat="server" ImageUrl="~/Redaktor.png" style="position: relative; top: -105px; left: 15px; width: 252px; height: 77px" />
-             <hr style="color: #FFFFFF; background-color: #FFFFFF" />
+                <%-- style="position: relative; top: 245px; left: 305px; width: 876px; margin-top: 1px;" --%>
+                <hr style="color: #FFFFFF; background-color: #FFFFFF" />
+            </div>
+             
+
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="IdClanku" DataSourceID="SqlDataSource1">
+                <Columns>
+                    <asp:BoundField DataField="IdClanku" HeaderText="IdClanku" ReadOnly="True" SortExpression="IdClanku" />
+                    <asp:BoundField DataField="Recenzent1Id" HeaderText="Recenzent1Id" SortExpression="Recenzent1Id" />
+                    <asp:BoundField DataField="Recenzent2Id" HeaderText="Recenzent2Id" SortExpression="Recenzent2Id" />
+                </Columns>
+            </asp:GridView> 
+            <div>
+                <hr>
+                Clanky:&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="vyberClanku" DataTextField="Nazev" DataValueField="id">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="vyberClanku" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT [id], [Nazev] 
+FROM [Clanky] t1 
+WHERE NOT EXISTS (SELECT IdClanku FROM   Clanky_recenzenti t2 WHERE t1.id = t2.IdClanku)
+"></asp:SqlDataSource>
+&nbsp;Recenzent1:
+                <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="vyberRecenzenta" DataTextField="UserName" DataValueField="Id">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="vyberRecenzenta" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT Id, UserName FROM AspNetUsers WHERE Role = 'Recenzent'"></asp:SqlDataSource>
+
+            &nbsp;Recenzent2:
+                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="vyberRecenzenta" DataTextField="UserName" DataValueField="Id">
+                </asp:DropDownList>
+                <br />
+                Termín do:&nbsp;&nbsp;&nbsp;
+                <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+                <br />
+                <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Přiřadit recenzentovi" />
+                <asp:Label ID="Label_clanek_check" style="color:black;" runat="server"></asp:Label>
+
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT * FROM [Clanky_recenzenti]"></asp:SqlDataSource>
+            
+             
+
         </div>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#0099CC" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: -95px; left: 33px; height: 54px; width: 217px" />
-    </form>
+         </form>
 </body>
 </html>
