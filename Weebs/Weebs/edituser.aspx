@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="background-color:#4F7D82">
+<body>
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="Label1" runat="server"></asp:Label>
@@ -33,12 +33,12 @@
         <br />
         <br />
         Email:<br />
-        <asp:TextBox ID="TextBox2" runat="server" Width="238px"></asp:TextBox>
+        <asp:TextBox ID="TextBox2" name="email" runat="server" Width="238px" ></asp:TextBox>
         <br />
         <br />
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cancel" Width="117px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Save" Width="103px" />
+        <asp:Button ID="Button1" runat="server" type="submit" OnClick="Button1_Click" Text="Save" Width="103px" />
         <br />
     </form>
 </body>

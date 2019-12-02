@@ -22,6 +22,15 @@ public partial class Admin : System.Web.UI.Page
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         _connection = new SqlConnection(connectionString);
         _connection.Open();
+
+        Label2.Text = Session["name"].ToString();
+        Label2.Font.Bold = true;
+        Label2.Font.Italic = true;
+
+        if (!IsPostBack)
+        {
+            Button1_Click(sender, e);
+        }
     }
 
     protected void Page_Unload(object sender, EventArgs e)
@@ -72,9 +81,6 @@ public partial class Admin : System.Web.UI.Page
                 row.Cells.Add(cell6);
                 tabel1.Rows.Add(row);
             }
-
-            
-
         }
         catch (Exception exception)
         {
@@ -140,5 +146,11 @@ public partial class Admin : System.Web.UI.Page
             Label1.ForeColor = Color.Red;
 
         }
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("~/Login.aspx");
     }
 }
