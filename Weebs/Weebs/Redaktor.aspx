@@ -79,7 +79,7 @@ WHERE NOT EXISTS (SELECT IdClanku FROM   Clanky_recenzenti t2 WHERE t1.id = t2.I
 
             </div>
             
-            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Button" Width="99px" />
+            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Vložení celého čísla časopisu na stránku" Width="297px" />
            
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT * FROM [Clanky_recenzenti]"></asp:SqlDataSource>

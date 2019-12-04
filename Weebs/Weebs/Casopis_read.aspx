@@ -12,7 +12,11 @@
     
     
     <style type="text/css">
-        .table {}
+        .table {
+            position: relative;
+            top: 78px;
+            left: 372px;
+        }
     </style>
     
     
@@ -20,8 +24,8 @@
     
     
 </head>
-<body style="height: 252px">
-    <form id="form1" runat="server">
+<body style="height: 252px" >
+    <form id="form1" runat="server" >
         <div>
 
            
@@ -44,7 +48,7 @@
         </asp:GridView> 
 
 
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Hlavní stránka" style="position: relative; top: -118px; left: 4px" />
 
 
         </div>
