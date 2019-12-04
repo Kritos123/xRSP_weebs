@@ -11,9 +11,9 @@
 <body  style="background-color:#4F7D82" ); >
     <form id="form1" runat="server">
         
-        <div style= "width:100%; min-height: 300px; height: 906px;" >
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Obrazky/Redaktor.png"  /> 
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#0099CC" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: -12px; left: 12px; height: 54px; width: 217px" />
+        <div style= "width:100%; min-height: 300px " >
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Redaktor.png"  /> 
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#0099CC" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: -30px; left: 33px; height: 54px; width: 217px" />
 
 
             <div>
@@ -79,7 +79,7 @@ WHERE NOT EXISTS (SELECT IdClanku FROM   Clanky_recenzenti t2 WHERE t1.id = t2.I
 
             </div>
             
-            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Přidat číslo časopisu" Width="168px" style="position: relative; top: 82px; left: 4px" />
+            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Button" Width="99px" />
            
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT * FROM [Clanky_recenzenti]"></asp:SqlDataSource>
