@@ -88,6 +88,15 @@ public partial class Casopis_read : System.Web.UI.Page
                 con.Close();
             }
         }
+        Response.Clear();
+        Response.Buffer = true;
+        Response.Charset = "";
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor); // ----------
+        Response.BinaryWrite(bytes);
+        Response.Flush();
+        Response.End();
     }
 
 
