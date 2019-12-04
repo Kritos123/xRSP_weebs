@@ -99,4 +99,9 @@ public partial class Admin : System.Web.UI.Page
         authenticationManager.SignOut();
         Response.Redirect("~/Login.aspx");
     }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/default.aspx");
+    }
 }

@@ -8,28 +8,28 @@
     <title>Admin page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color:#4F7D82">
     <form id="form1" runat="server">
     
 <table ID="header" width="100%">
     <tr>
-        <td>
-            <p> Admin page </p>
-        </td>
+        <td style="color: #FFFFFF">
+           
+            Administrátor:</td>
         <td style="align-content: right">
-            <p> You are logged as:
+            <p style="color: #FFFFFF"> Jste přihlášen jako: 
                 <asp:Label ID="Label2" runat="server"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="Button3" runat="server" Height="33px" OnClick="Button3_Click" Text="Logout" Width="94px" />
+                <asp:Button ID="Button3" runat="server" Height="33px" OnClick="Button3_Click" Text="Odhlásit" Width="94px" />
             </p>
         </td>
     </tr>
 </table>
     
         <p>
-        <asp:Button ID="Button1" runat="server" Text="Users" Width="96px" OnClick="Button1_Click" />
+        <asp:Button ID="Button1" runat="server" Text="Uživatelé" Width="96px" OnClick="Button1_Click" />
 &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button2" runat="server" Text="Articles" Width="100px" OnClick="Button2_Click" />
+        <asp:Button ID="Button2" runat="server" Text="Články" Width="100px" OnClick="Button2_Click" />
         </p>
        
         <div></div>
@@ -37,12 +37,12 @@
 
     <div>
 
-        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+        <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
 
     </div>
     
     <div>
-        <asp:Table class="table table-striped" ID="tabel1" runat="server">
+        <asp:Table class="table table-striped" ID="tabel1" runat="server" ForeColor="White">
 
         </asp:Table>
     </div>

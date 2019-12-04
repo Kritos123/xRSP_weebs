@@ -78,11 +78,9 @@ WHERE NOT EXISTS (SELECT IdClanku FROM   Clanky_recenzenti t2 WHERE t1.id = t2.I
                 <asp:Label ID="Label_clanek_check" style="color:black;" runat="server"></asp:Label>
 
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            
+            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Button" Width="99px" />
+           
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT * FROM [Clanky_recenzenti]"></asp:SqlDataSource>
             

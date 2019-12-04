@@ -25,7 +25,7 @@ public partial class Register : System.Web.UI.Page
 
         if (vysledek.Succeeded)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("LogOut.aspx");
         }
         else
         {
@@ -36,5 +36,10 @@ public partial class Register : System.Web.UI.Page
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("default.aspx");
     }
 }

@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 
 public partial class Autor : System.Web.UI.Page
 {
+  
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -40,10 +42,13 @@ public partial class Autor : System.Web.UI.Page
         SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
         DataTable sqdt = new DataTable();
         sqlda.Fill(sqdt);
+        
         for (int i = 0; i < sqdt.Rows.Count; i++)
         {
+          
             if (sqdt.Rows[i]["UserName"].ToString() == Name)
             {
+        
                 if (sqdt.Rows[i]["Role"].ToString() == "Autor")
                 {
                     Bind();
@@ -94,7 +99,7 @@ public partial class Autor : System.Web.UI.Page
                 using (SqlConnection con = new SqlConnection(constr))
                 {
 
-                    string query = "insert into Clanky (Nazev, Typ, Data) values (@Nazev, @Typ, @Data)";
+                    string query = "insert into Clanky (Nazev, Typ, Data, Jmeno) values (@Nazev, @Typ, @Data, @Jmeno)";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
 
@@ -128,12 +133,13 @@ public partial class Autor : System.Web.UI.Page
                         }
 
 
-                        cmd.CommandText = "insert into Clanky (Nazev, Typ, Data, Verze) values (@Nazev, @Typ, @Data, @Verze)";
+                        cmd.CommandText = "insert into Clanky (Nazev, Typ, Data, Verze, Jmeno) values (@Nazev, @Typ, @Data, @Verze, @Jmeno)";
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@Nazev", soubor);
                         cmd.Parameters.AddWithValue("@Typ", typ);
                         cmd.Parameters.AddWithValue("@Data", bytes);
                         cmd.Parameters.AddWithValue("@Verze", number);
+                        cmd.Parameters.AddWithValue("@Jmeno", Session["name"]);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();

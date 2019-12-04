@@ -13,6 +13,7 @@
         <br />
         <p>
             <asp:Literal runat="server" ID="StatusMessage" />
+            <asp:Button ID="Button2" runat="server" BackColor="#006699" BorderColor="White" ForeColor="White" OnClick="Button2_Click" style="position: relative; top: -36px; left: 309px; width: 147px; height: 34px" Text="Hlavní stránka" />
         </p>  
         <asp:Label ID="Label1" runat="server" Text="Jmeno"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

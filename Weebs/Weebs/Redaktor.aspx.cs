@@ -229,4 +229,9 @@ public partial class Redaktor : System.Web.UI.Page
 
 
 
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Casopis_add.aspx");
+    }
 }  

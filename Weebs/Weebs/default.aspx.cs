@@ -14,7 +14,7 @@ public partial class master_page : System.Web.UI.Page
 
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("Clanky.aspx");
+        Response.Redirect("Casopis_read.aspx");
         
     }
 
@@ -26,5 +26,10 @@ public partial class master_page : System.Web.UI.Page
     protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("Login.aspx");
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Casopis_read.aspx");
     }
 }
