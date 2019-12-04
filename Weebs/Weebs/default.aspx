@@ -1,4 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="master_page" %>
+﻿
+
+
+
+
+
+
+Page Language="C#" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="master_page" %>
 
 <!DOCTYPE html>
 

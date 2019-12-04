@@ -1,4 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Casopis_add.aspx.cs" Inherits="Casopis_add" %>
+﻿
+a
+
+
+
+
+
+
+
+Page Language="C#" AutoEventWireup="true" CodeFile="Casopis_add.aspx.cs" Inherits="Casopis_add" %>
 
 <!DOCTYPE html>
 

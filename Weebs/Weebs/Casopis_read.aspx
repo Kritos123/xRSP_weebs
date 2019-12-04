@@ -12,7 +12,11 @@
     
     
     <style type="text/css">
-        .table {}
+        .table {
+            position: relative;
+            top: 22px;
+            left: 410px;
+        }
     </style>
     
     
@@ -20,14 +24,14 @@
     
     
 </head>
-<body style="height: 252px">
+<body style="height: 252px"  style="background-color:#4F7D82">
     <form id="form1" runat="server">
-        <div>
+        <div style="height: 188px">
 
            
             <asp:GridView ID="tabulka" runat="server"   
               
-            AutoGenerateColumns="False" CssClass="table" BorderColor="Black" ForeColor="Black" Width="506px">  
+            AutoGenerateColumns="False" CssClass="table" BorderColor="White" ForeColor="White" Width="506px">  
             <Columns>  
                 <asp:BoundField DataField="cl_nazev" HeaderText="Název" /> 
                 <asp:BoundField DataField="cl_cislo" HeaderText="Číslo" />
@@ -44,7 +48,7 @@
         </asp:GridView> 
 
 
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Hlavní stránka" BackColor="#0066FF" BorderColor="White" ForeColor="White" style="position: relative; top: -116px; left: 4px" />
 
 
         </div>
