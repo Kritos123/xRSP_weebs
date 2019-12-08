@@ -153,4 +153,9 @@ public partial class Admin : System.Web.UI.Page
         Session.Abandon();
         Response.Redirect("~/Login.aspx");
     }
+
+    protected void odst_cl_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/clanek_delete.aspx");
+    }
 }
