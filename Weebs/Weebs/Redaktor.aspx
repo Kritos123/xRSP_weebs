@@ -84,8 +84,17 @@ WHERE NOT EXISTS (SELECT IdClanku FROM   Clanky_recenzenti t2 WHERE t1.id = t2.I
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>" SelectCommand="SELECT * FROM [Clanky_recenzenti]"></asp:SqlDataSource>
             
-             
+             <hr/>
+            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="Clanky_stiznosti">
+                <Columns>
+                    <asp:BoundField DataField="id" HeaderText="id" ReadOnly="True" InsertVisible="False" SortExpression="id"></asp:BoundField>
+                    <asp:BoundField DataField="Nazev_stiznosti" HeaderText="Nazev_stiznosti" SortExpression="Nazev_stiznosti"></asp:BoundField>
+                    <asp:BoundField DataField="Stiznost" HeaderText="Stiznost" SortExpression="Stiznost"></asp:BoundField>
+                    <asp:BoundField DataField="Nazev" HeaderText="Nazev" SortExpression="Nazev"></asp:BoundField>
+                </Columns>
+            </asp:GridView>
 
+            <asp:SqlDataSource runat="server" ID="Clanky_stiznosti" ConnectionString='<%$ ConnectionStrings:DB_A503C7_weebsConnectionString %>' SelectCommand="SELECT * FROM [Clanky_Stiznosti]"></asp:SqlDataSource>
         </div>
          </form>
 </body>

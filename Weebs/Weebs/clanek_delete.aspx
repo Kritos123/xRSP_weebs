@@ -18,13 +18,18 @@
                 <asp:BoundField DataField="cl_nazev" HeaderText="Název" /> 
                 <asp:BoundField DataField="cl_cislo" HeaderText="Číslo" />
                 <asp:BoundField DataField="cl_datum" HeaderText="Datum vydání" />
-                 <asp:CommandField ShowDeleteButton="true" /> 
+                 <%--<asp:CommandField ShowDeleteButton="true" />--%> 
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center"> 
                 
                     <ItemTemplate>  
+                        <asp:LinkButton ID="lnkDelete" runat="server" Text="DELETE" OnClick="GridView1_RowDeleting"  
+                            CommandArgument='<%# Eval("cl_cislo") %>'></asp:LinkButton>  
+                    </ItemTemplate> 
+                    <%--xxx--%>
+                  <%--  <ItemTemplate>  
                         <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
                             CommandArgument='<%# Eval("cl_cislo") %>'></asp:LinkButton>  
-                    </ItemTemplate>  
+                    </ItemTemplate>  --%>
                 </asp:TemplateField>
                  
                  

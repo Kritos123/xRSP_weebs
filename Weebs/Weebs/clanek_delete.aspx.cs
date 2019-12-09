@@ -110,21 +110,20 @@ public partial class clanek_delete : System.Web.UI.Page
         Response.End();
     }
 
-/*
+
   
-// budu k článkům muset nějak přiřazovat id, nááádhera :/ (předělat článek add :/ a přidat do databáze id :/ 
-    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+
+    protected void GridView1_RowDeleting(object sender, EventArgs eventArgs)
     {
-        
-        GridViewRow row = (GridViewRow)tabulka.Rows[e.RowIndex];
-        // Label lbldeleteid = (Label)row.FindControl("lblID");
+        var id =  ((sender as LinkButton)?.CommandArgument);
+
         con.Open();
-        SqlCommand cmd = new SqlCommand("delete FROM Casopis where cl_cislo ='"  + Convert.ToString(tabulka.DataKeys[e.RowIndex].Value.ToString()) + "'", con);
+        SqlCommand cmd = new SqlCommand("delete FROM Casopis where cl_cislo ='" + id + "'", con);
         cmd.ExecuteNonQuery();
         con.Close();
         Bind();
     }
 
 
-    */
+    
 }
