@@ -212,11 +212,13 @@ public partial class Autor : System.Web.UI.Page
         {
             if (sqdt.Rows[i]["Nazev"].ToString() == TextBox1.Text)
             {
-                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev) values (@Nazev_stiznosti, @Stiznost, @Nazev)";
+                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev, mail) values (@Nazev_stiznosti, @Stiznost, @Nazev, @mail)";
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("@Nazev_stiznosti", TextBox2.Text);
+                cmd.Parameters.AddWithValue("@mail", TextBox4.Text);
                 cmd.Parameters.AddWithValue("@Stiznost", TextBox3.Text);
                 cmd.Parameters.AddWithValue("@Nazev", TextBox1.Text);
+               
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

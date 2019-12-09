@@ -61,9 +61,11 @@
         &nbsp;&nbsp;<br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label2" runat="server" Text="Stiznost"></asp:Label>
-            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Odeslat" style="position: relative; top: 67px; left: 40px; width: 166px; height: 32px" />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Odeslat" style="position: relative; top: 124px; left: 33px; width: 166px; height: 32px" />
           
             <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine" style="position: relative; top: 8px; left: -128px"></asp:TextBox>
+          
+            <asp:TextBox ID="TextBox4" runat="server" TextMode="MultiLine" style="position: relative; top: 64px; left: -307px"></asp:TextBox>
           
         </div>
     </form>
