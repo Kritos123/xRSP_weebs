@@ -47,6 +47,9 @@
     </div>
     
 
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="id" OnPageIndexChanging="GridView1_PageIndexChanging" 
+                              OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" 
+                              OnRowUpdating="GridView1_RowUpdating" ForeColor="White" >  
                     <%-- style="position: relative; top: 245px; left: 305px; width: 876px; margin-top: 1px;" --%>
                     <Columns>  
                         <asp:BoundField DataField="id" HeaderText="Id." /> 
