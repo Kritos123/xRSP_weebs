@@ -30,11 +30,9 @@
         <asp:Button ID="Button1" runat="server" Text="Uživatelé" Width="96px" OnClick="Button1_Click" />
 &nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button2" runat="server" Text="Články" Width="100px" OnClick="Button2_Click" />
-            <asp:Button ID="odst_cl" runat="server" OnClick="odst_cl_Click" Text="Odstranit článek pro čtenáře" />
         </p>
        
         <div></div>
-    </form>
 
     <div>
 
@@ -49,5 +47,29 @@
     </div>
     
 
+                    <%-- style="position: relative; top: 245px; left: 305px; width: 876px; margin-top: 1px;" --%>
+                    <Columns>  
+                        <asp:BoundField DataField="id" HeaderText="Id." /> 
+                        <asp:BoundField DataField="Nazev" HeaderText="Název" />  
+                
+                        <asp:BoundField DataField="Zkontroloval" HeaderText="Zkontroloval" />  
+                        <asp:BoundField DataField="Status" HeaderText="Status" />  
+                        <asp:BoundField DataField="Vyjadreni" HeaderText="Vyjádřil" />  
+                        <asp:CommandField ShowEditButton="true" />  
+                        <asp:CommandField ShowDeleteButton="true" />
+                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
+                            <ItemTemplate>  
+                                <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
+                                                CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>  
+                            </ItemTemplate>  
+
+                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                        </asp:TemplateField> 
+                    </Columns>  
+                    <RowStyle BorderColor="White" />
+                </asp:GridView>  
+    </form>
+
+    
     </body>
 </html>
