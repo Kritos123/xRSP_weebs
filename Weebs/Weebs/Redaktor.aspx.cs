@@ -227,16 +227,7 @@ public partial class Redaktor : System.Web.UI.Page
         }
     }
 
-    protected void GridView3_RowDeleting(object sender, EventArgs eventArgs)
-    {
-        var id = ((sender as LinkButton)?.CommandArgument);
 
-        con.Open();
-        SqlCommand cmd = new SqlCommand("delete FROM Clanky_Stiznosti where Stiznost ='" + id + "'", con);
-        cmd.ExecuteNonQuery();
-        con.Close();
-        Bind();
-    }
 
 
     protected void Button3_Click(object sender, EventArgs e)

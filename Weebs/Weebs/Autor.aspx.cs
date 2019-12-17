@@ -24,7 +24,7 @@ public partial class Autor : System.Web.UI.Page
     private void connect()
     {
         string Name = (string)(Session["name"]);
-        Response.Write(Name);
+     
         if (Name == null)
         {
             Response.Redirect("/Login.aspx");
@@ -181,7 +181,7 @@ public partial class Autor : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = typ;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor + autor + verze); // ----------
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor ); // ----------
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
@@ -212,13 +212,11 @@ public partial class Autor : System.Web.UI.Page
         {
             if (sqdt.Rows[i]["Nazev"].ToString() == TextBox1.Text)
             {
-                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev, mail) values (@Nazev_stiznosti, @Stiznost, @Nazev, @mail)";
+                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev) values (@Nazev_stiznosti, @Stiznost, @Nazev)";
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("@Nazev_stiznosti", TextBox2.Text);
-                cmd.Parameters.AddWithValue("@mail", TextBox4.Text);
                 cmd.Parameters.AddWithValue("@Stiznost", TextBox3.Text);
                 cmd.Parameters.AddWithValue("@Nazev", TextBox1.Text);
-               
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

@@ -1,57 +1,47 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Casopis_read.aspx.cs" Inherits="Casopis_read" %>
+﻿<%@ Page Language="C#" Theme="Casopis_read" AutoEventWireup="true" CodeFile="Casopis_read.aspx.cs" Inherits="Casopis_read"%>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <link  rel="stylesheet" type="text/css" href="Casopis_read.css"/>
+<head runat="server" >
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    
-    
-  
-    
-    
-    <style type="text/css">
-        .table {
-            position: relative;
-            top: 78px;
-            left: 372px;
-        }
-    </style>
-    
-    
-  
+    <title>Članky</title>
+   
     
     
 </head>
-<body style="height: 252px" >
-    <form id="form1" runat="server" >
-        <div>
+<body style="background-color:#4F7D82"  >
 
-           
-            <asp:GridView ID="tabulka" runat="server"   
+     <h1> Članky </h1>
+      <div>
+        </div>
+
+    <form id="form1" runat="server" >
+     
+ <p></p>  <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"  Text="Hlavní stránka" href="#" class="button" /> </p>
+          
+
+        <asp:GridView ID="tabulka" runat="server"   
               
-            AutoGenerateColumns="False" CssClass="table" BorderColor="Black" ForeColor="Black" Width="506px">  
+            AutoGenerateColumns="False" CssClass="table" BorderColor="White" ForeColor="White" Width="506px">  
             <Columns>  
                 <asp:BoundField DataField="cl_nazev" HeaderText="Název" /> 
                 <asp:BoundField DataField="cl_cislo" HeaderText="Číslo" />
                 <asp:BoundField DataField="cl_datum" HeaderText="Datum vydání" />
               <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
                     <ItemTemplate>  
-                        <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"  
+                        <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile" class="button"
                             CommandArgument='<%# Eval("cl_cislo") %>'></asp:LinkButton>  
                     </ItemTemplate>  
                 </asp:TemplateField>
-                 
-                 
-            </Columns>  
+                             </Columns>  
         </asp:GridView> 
-
-
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Hlavní stránka" style="position: relative; top: -118px; left: 4px" />
-
-
-        </div>
+                
+              
+      
     </form>
 </body>
 </html>

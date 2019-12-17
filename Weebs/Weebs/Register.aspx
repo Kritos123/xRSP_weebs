@@ -1,35 +1,37 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+﻿<%@ Page Language="C#" Theme="Register" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link  rel="stylesheet" type="text/css" href="style.css"/>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Registrovat se</title>
 </head>
 <body style="background-color:#4F7D82">
     <form id="form1" runat="server">
-        Zaregistrovat nového uživatele<br />
-        <br />
+       <h1>Zaregistrovat nového uživatele</h1> <br />
+       
         <p>
-            <asp:Literal runat="server" ID="StatusMessage" />
-            <asp:Button ID="Button2" runat="server" BackColor="#006699" BorderColor="White" ForeColor="White" OnClick="Button2_Click" style="position: relative; top: -36px; left: 309px; width: 147px; height: 34px" Text="Hlavní stránka" />
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Literal runat="server" ID="StatusMessage" />
+            &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  Text="Hlavní stránka" href="#" class="button"/>
         </p>  
-        <asp:Label ID="Label1" runat="server" Text="Jmeno"></asp:Label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Text="Jmeno" href="#" class="text" ></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <br />
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Heslo"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password"></asp:TextBox>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Heslo" href="#" class="text"></asp:Label>&nbsp;&nbsp;&nbsp;
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password" href="#" class="text"></asp:TextBox>
         <br />
         <br />
-        <asp:Label ID="Label3" runat="server" Text="Heslo znovu"></asp:Label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="Heslo znovu" href="#" class="text"></asp:Label>
 &nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password"></asp:TextBox>
+        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password" href="#" class="text"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+        <asp:Button ID="Button1" runat="server" Text="Uložit" OnClick="Button1_Click" href="#" class="button" />
     </form>
 </body>
 </html>
