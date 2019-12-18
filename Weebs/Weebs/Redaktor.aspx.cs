@@ -77,7 +77,7 @@ public partial class Redaktor : System.Web.UI.Page
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Id,Nazev,Zkontroloval,Status,Vyjadreni from Clanky";
+                cmd.CommandText = "select Id,Nazev,Zkontroloval, Zkontroloval_2,Status,Vyjadreni from Clanky";
                 cmd.Connection = con;
                 con.Open();
                 GridView1.DataSource = cmd.ExecuteReader();
