@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body>
+<body style="background-color:#4F7D82">
     <form id="form1" runat="server">
         <div>
               
@@ -24,7 +24,7 @@
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center"> 
                 
                     <ItemTemplate>  
-                        <asp:LinkButton ID="lnkDelete" runat="server" Text="DELETE" OnClick="GridView1_RowDeleting"  
+                        <asp:LinkButton ID="lnkDelete" runat="server" Text="DELETE" OnClick="GridView1_RowDeleting" ForeColor="#FFFFFF" 
                             CommandArgument='<%# Eval("cl_cislo") %>'></asp:LinkButton>  
                     </ItemTemplate> 
                     <%--xxx--%>

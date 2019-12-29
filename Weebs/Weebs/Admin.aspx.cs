@@ -67,15 +67,23 @@ public partial class Admin : System.Web.UI.Page
                 else
                     cell4.Text = Convert.ToString(reader["Email"]);
                 row.Cells.Add(cell4);
+               
                 HyperLink edit = new HyperLink();
                 edit.Text = "Edit";
                 edit.NavigateUrl = "/edituser.aspx?name="+ cell2.Text;
+                edit.ForeColor = Color.White;
+                edit.Font.Size = 20;
+                edit.Font.Underline = true;
+                
                 TableCell cell5 = new TableCell();
                 cell5.Controls.Add(edit);
                 row.Cells.Add(cell5);
                 HyperLink del = new HyperLink();
                 del.Text = "Delete";
+                del.ForeColor = Color.White;
                 del.NavigateUrl = "/deluser.aspx?name=" + cell2.Text;
+                del.Font.Size = 20;
+                del.Font.Underline = true;
                 TableCell cell6 = new TableCell();
                 cell6.Controls.Add(del);
                 row.Cells.Add(cell6);

@@ -37,7 +37,8 @@ public partial class edituser : System.Web.UI.Page
             connect();
 
             Label3.Text = Request.QueryString["name"];
-            Label3.ForeColor = Color.Green;
+            Label3.ForeColor = Color.White;
+            Label3.Font.Size = 16;
 
             SqlDataReader reader = null;
             string query = "SELECT * FROM AspNetUsers WHERE UserName = " + "'" + Request.QueryString["name"] + "'";
@@ -48,9 +49,11 @@ public partial class edituser : System.Web.UI.Page
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    Label1.Text = "Ready for editing.";
+                    Label1.Text = "Editace uživatelů";
                     TextBox2.Text = Convert.ToString(reader["Email"]);
                     Label2.Text = Convert.ToString(reader["Role"]);
+                    Label1.Font.Size = 15;
+                    Label1.ForeColor = Color.White;
                 }
                 reader.Close();
             }

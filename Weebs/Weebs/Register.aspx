@@ -15,22 +15,29 @@
        
         <p>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Literal runat="server" ID="StatusMessage" />
-            &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  Text="Hlavní stránka" href="#" class="button"/>
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  Text="Hlavní stránka" href="#" class="button"/>
         </p>  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Text="Jmeno" href="#" class="text" ></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox1" runat="server" ForeColor="Black"></asp:TextBox>
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
         <br />
+        &nbsp;&nbsp;<br />
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Heslo" href="#" class="text"></asp:Label>
         <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Heslo" href="#" class="text"></asp:Label>&nbsp;&nbsp;&nbsp;
 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password" href="#" class="text" ForeColor="Black"></asp:TextBox>
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
         <br />
+        &nbsp;&nbsp;&nbsp;<br />
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server" Text="Heslo znovu" href="#" class="text"></asp:Label>
         <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="Heslo znovu" href="#" class="text"></asp:Label>
-&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password" href="#" class="text" ForeColor="Black"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+        <br />
+&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" Text="Uložit" OnClick="Button1_Click" href="#" class="button" />
     </form>
 </body>
