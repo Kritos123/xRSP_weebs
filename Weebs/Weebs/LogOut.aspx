@@ -11,8 +11,8 @@
     <form id="form1" runat="server">
         <div style="height: 248px">
             <asp:Button ID="Button1" runat="server"  OnClick="Button1_Click" Text="Odhlásit" style="position: relative; top: 106px; width: 133px; left: 97px;" BackColor="#0066FF" BorderColor="White" ForeColor="White" />
-            <p> align="left" style="font-size: medium; color: #FFFFFF; position: relative;"> Nyní jste úspěšně zaregistrován/zaregistrována.<br />
-&nbsp;Nyní se odhlašte a vyčkejte, až Administrátor nastaví vaši roli. </p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp; Nyní jste úspěšně zaregistrován/zaregistrována. Vaše současná role je čtenář.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nyní se odhlašte.</p>
             </div>
     </form>
 </body>

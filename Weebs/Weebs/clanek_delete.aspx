@@ -11,6 +11,8 @@
     <form id="form1" runat="server">
         <div>
               
+                  <asp:Label ID="Label2" runat="server" Text="Zde můžete odstranit celé číslo časopisu"></asp:Label>
+              
                   <asp:GridView ID="tabulka" runat="server"   
               
             AutoGenerateColumns="False" CssClass="table" BorderColor="Black" ForeColor="Black" Width="506px">  
@@ -41,6 +43,7 @@
 
 
         </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Zpět" />
     </form>
 </body>
 </html>

@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
         
         <div style= "width:100%; min-height: 300px " >
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Redaktor.png"  /> 
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Obrazky/Redaktor.png"  /> 
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" BackColor="#0099CC" BorderColor="White" Font-Size="X-Large" ForeColor="White" style="position: relative; top: -30px; left: 33px; height: 54px; width: 217px" />
 
 

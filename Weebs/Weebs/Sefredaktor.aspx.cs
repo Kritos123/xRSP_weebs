@@ -6,12 +6,62 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.IO;
+
 
 public partial class Sefredaktor : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            connect();
+
+        }
         Bind();
+    }
+    private void connect()
+    {
+        string Name = (string)(Session["name"]);
+        Response.Write(Name);
+
+        SqlConnection con = new SqlConnection(@"Data Source=SQL6007.site4now.net;Initial Catalog=DB_A503C7_weebs;User Id=DB_A503C7_weebs_admin;Password=Password1*;");
+        con.Open();
+        SqlCommand cm = new SqlCommand("Select * from AspNetUsers");
+        SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
+        DataTable sqdt = new DataTable();
+        sqlda.Fill(sqdt);
+
+        for (int i = 0; i < sqdt.Rows.Count; i++)
+        {
+
+
+
+            if (sqdt.Rows[i]["UserName"].ToString() == Name)
+            {
+                if (sqdt.Rows[i]["Role"].ToString() == "Sefredaktor")
+                {
+                    Bind();
+                    break;
+                }
+                else
+                {
+                    Response.Redirect("/Login.aspx");
+                }
+            }
+            else if ((sqdt.Rows[i]["UserName"].ToString() != Name) && (i == sqdt.Rows.Count))
+            {
+                Response.Redirect("/Login.aspx");
+            }
+
+        }
+
+
+
+
+
+
     }
     protected void Bind()
     {
@@ -149,5 +199,22 @@ protected void DownloadFile(object sender, EventArgs e)
         GridView3.Visible = false;
         Button7.Visible = true;
         Button8.Visible = false;
+    }
+
+    protected void Button9_Click(object sender, EventArgs e)
+    {
+        string Name = (string)(Session["name"]);
+
+
+        Session["name"] = null;
+
+
+
+
+
+        Name = null;
+        var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+        authenticationManager.SignOut();
+        Response.Redirect("/Login.aspx");
     }
 }

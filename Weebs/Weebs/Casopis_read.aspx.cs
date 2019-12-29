@@ -53,8 +53,17 @@ public partial class Casopis_read : System.Web.UI.Page
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select cl_nazev, cl_cislo, cl_datum from Casopis";
-                cmd.Connection = con;
+
+
+               // cl_nazev, cl_cislo, cl_datum
+
+
+
+
+
+
+                cmd.CommandText = "select TOP 3 * from Casopis ORDER BY cl_cislo DESC  ";
+                cmd.Connection = con; 
                 con.Open();
                 tabulka.DataSource = cmd.ExecuteReader();
                 tabulka.DataBind();
@@ -66,7 +75,7 @@ public partial class Casopis_read : System.Web.UI.Page
 
     protected void DownloadFile(object sender, EventArgs e)
     {
-        int id = int.Parse((sender as LinkButton).CommandArgument);
+        int id = int.Parse((sender as Button).CommandArgument);
         byte[] bytes;
         string soubor;
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -74,12 +83,16 @@ public partial class Casopis_read : System.Web.UI.Page
         {
             using (SqlCommand cmd = new SqlCommand())
             {
+               
+
+
                 cmd.CommandText = "select cl_data, cl_nazev from Casopis where cl_cislo=@cl_cislo";
                 cmd.Parameters.AddWithValue("@cl_cislo", id);
                 cmd.Connection = con;
                 con.Open();
                 using (SqlDataReader sdr = cmd.ExecuteReader())
                 {
+
                     sdr.Read();
                     bytes = (byte[])sdr["cl_data"];
                 

@@ -11,9 +11,11 @@
 
     <title>Šefredaktor</title>
 </head>
-&nbsp;&nbsp;&nbsp;&nbsp;<body style="background-color:#4F7D82" >
-   &nbsp;&nbsp;&nbsp;&nbsp; <h1> Šefredaktor </h1>
-    <form id="form1" runat="server" >
+&nbsp;&nbsp;&nbsp;&nbsp;<body style="background-color:#4F7D82" ><form id="form1" runat="server" >
+       
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <h1> Šefredaktor 
+           <asp:Button ID="Button9" runat="server" OnClick="Button9_Click" Text="Odhlásit" class="button"  />
+       </h1>
        
        &nbsp;&nbsp;&nbsp;&nbsp; <div> <asp:GridView ID="GridView1" Visible="false" runat="server"  
                  

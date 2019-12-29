@@ -48,7 +48,7 @@ public partial class edituser : System.Web.UI.Page
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    Label1.Text = "Ready fort editing.";
+                    Label1.Text = "Ready for editing.";
                     TextBox2.Text = Convert.ToString(reader["Email"]);
                     Label2.Text = Convert.ToString(reader["Role"]);
                 }

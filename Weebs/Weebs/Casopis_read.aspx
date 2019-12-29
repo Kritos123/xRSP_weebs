@@ -15,7 +15,7 @@
 </head>
 <body style="background-color:#4F7D82"  >
 
-     <h1> Članky </h1>
+     <h1 style="color: #FFFFFF"> Časopis </h1>
       <div>
         </div>
 
@@ -33,8 +33,8 @@
                 <asp:BoundField DataField="cl_datum" HeaderText="Datum vydání" />
               <asp:TemplateField ItemStyle-HorizontalAlign="Center">  
                     <ItemTemplate>  
-                        <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile" class="button"
-                            CommandArgument='<%# Eval("cl_cislo") %>'></asp:LinkButton>  
+                        <asp:Button ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile" class="button"
+                            CommandArgument='<%# Eval("cl_cislo") %>'></asp:Button>  
                     </ItemTemplate>  
                 </asp:TemplateField>
                              </Columns>  

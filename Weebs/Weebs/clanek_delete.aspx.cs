@@ -22,35 +22,56 @@ public partial class clanek_delete : System.Web.UI.Page
         if (!IsPostBack)
         {
             connect();
-
         }
-
-       
     }
 
     private void connect()
     {
         string Name = (string)(Session["name"]);
-        Response.Write(Name);
+        //Response.Write(Name);
+        if (Name == null)
+        {
+            Response.Redirect("/Login.aspx");
 
+        }
+        if (Request.UrlReferrer == null)
+        {
+            Session["name"] = null;
+            Name = null;
+            Response.Redirect("/Login.aspx");
+        }
         SqlConnection con = new SqlConnection(@"Data Source=SQL6007.site4now.net;Initial Catalog=DB_A503C7_weebs;User Id=DB_A503C7_weebs_admin;Password=Password1*;");
         con.Open();
         SqlCommand cm = new SqlCommand("Select * from AspNetUsers");
         SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
         DataTable sqdt = new DataTable();
         sqlda.Fill(sqdt);
-
         for (int i = 0; i < sqdt.Rows.Count; i++)
         {
-
-
-            Bind();
+            if (sqdt.Rows[i]["UserName"].ToString() == Name)
+            {
+                if (sqdt.Rows[i]["Role"].ToString() == "Administrator")
+                {
+                    Bind();
+                    break;
+                }
+                else
+                {
+                    Response.Redirect("/Login.aspx");
+                }
+            }
+            else if ((sqdt.Rows[i]["UserName"].ToString() != Name) && (i == sqdt.Rows.Count))
+            {
+                Response.Redirect("/Login.aspx");
+            }
 
         }
-
-
-
     }
+
+
+
+
+ 
     private void Bind()
     {
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -125,5 +146,10 @@ public partial class clanek_delete : System.Web.UI.Page
     }
 
 
-    
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Admin.aspx");
+    }
 }

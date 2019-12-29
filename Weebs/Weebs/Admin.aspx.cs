@@ -93,6 +93,7 @@ public partial class Admin : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         SqlDataReader reader = null;
+        Response.Redirect("Admin_del_edit_user.aspx");
         try
         {
             SqlCommand command = new SqlCommand("SELECT * FROM Clanky", _connection);
@@ -152,5 +153,10 @@ public partial class Admin : System.Web.UI.Page
     {
         Session.Abandon();
         Response.Redirect("~/Login.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("clanek_delete.aspx");
     }
 }
