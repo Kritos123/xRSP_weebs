@@ -26,6 +26,18 @@ public partial class Redaktor : System.Web.UI.Page
     }
     private void connect()
     {
+        if (Session["zapis"] == null)
+        {
+            Session["zapis"] = 0;
+            int zap = (int)(Session["zapis"]);
+            Response.Write("Počet nových příspěvků: " + zap);
+
+        }
+        else
+        {
+            int zap = (int)(Session["zapis"]);
+            Response.Write("Počet nových příspěvků: " + zap);
+        }
         string Name = (string)(Session["name"]);
         //Response.Write(Name);
         if (Name == null)
@@ -69,9 +81,6 @@ public partial class Redaktor : System.Web.UI.Page
         protected void Bind()
     {
      
-        
-        //zap = 0;
-       // Session["zapis"] = 0;
         string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {
@@ -176,6 +185,7 @@ public partial class Redaktor : System.Web.UI.Page
     {
         string Name = (string)(Session["name"]);
         Session["name"] = null;
+        Session["zapis"] = null;
         Name = null;
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();

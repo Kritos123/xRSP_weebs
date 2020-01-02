@@ -102,8 +102,8 @@ public partial class Admin : System.Web.UI.Page
         }
         else
         {
-            StatusText.Text = "Spatne jmeno nebo heslo";
-           
+            StatusText.Text = "Špatné jméno nebo heslo";
+            
         }
 
     }

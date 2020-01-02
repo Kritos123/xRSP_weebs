@@ -46,7 +46,10 @@ public partial class Register : System.Web.UI.Page
         }
         else
         {
-            StatusMessage.Text = vysledek.Errors.FirstOrDefault();
+            if(vysledek.Errors.FirstOrDefault()== "Passwords must be at least 6 characters.")
+            StatusMessage.Text = ("Heslo musí být alespoň 6 znaků dlouhé");
+            else if(vysledek.Errors.FirstOrDefault() == "Name "+ TextBox1.Text + " is already taken.")
+                StatusMessage.Text = "Jméno "+ TextBox1.Text + " je již zabrané";
         }
     }
 

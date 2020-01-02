@@ -35,7 +35,7 @@ public partial class Autor : System.Web.UI.Page
             Session["name"] = null;
             Name = null;
             Response.Redirect("/Login.aspx");
-        }
+        }http://localhost:52439/Casopis_add.aspx
         SqlConnection con = new SqlConnection(@"Data Source=SQL6007.site4now.net;Initial Catalog=DB_A503C7_weebs;User Id=DB_A503C7_weebs_admin;Password=Password1*;");
         con.Open();
         SqlCommand cm = new SqlCommand("Select * from AspNetUsers");
@@ -181,7 +181,7 @@ public partial class Autor : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = typ;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor ); // ----------
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor); // ----------
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

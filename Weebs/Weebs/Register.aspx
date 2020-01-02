@@ -21,24 +21,34 @@
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+            ControlToValidate="TextBox1" ValidationGroup="register" ErrorMessage="Nebyl vyplněno uživatelské jméno">
+        </asp:RequiredFieldValidator>
         <br />
         &nbsp;&nbsp;<br />
 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Heslo" href="#" class="text"></asp:Label>
         <br />
 
         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+            ControlToValidate="TextBox2" ValidationGroup="register" ErrorMessage="Nebyl vyplněno heslo ">
+        </asp:RequiredFieldValidator>
+        
         <br />
         &nbsp;&nbsp;&nbsp;<br />
 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server" Text="Heslo znovu" href="#" class="text"></asp:Label>
         <br />
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="TextBox3" runat="server" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+            ControlToValidate="TextBox3" ValidationGroup="register" ErrorMessage="Nebyl vyplněno heslo znovu">
+        </asp:RequiredFieldValidator>
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
         <br />
 &nbsp;
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" Text="Uložit" OnClick="Button1_Click" href="#" class="button" />
+        <asp:Button ID="Button1" runat="server" Text="Uložit" OnClick="Button1_Click"  ValidationGroup="register" href="#" class="button" />
     </form>
 </body>
 </html>
