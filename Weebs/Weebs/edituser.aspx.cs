@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,13 @@ using System.Web.UI.WebControls;
 public partial class edituser : System.Web.UI.Page
 {
     private SqlConnection _connection;
+
+    private void connect()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        _connection = new SqlConnection(connectionString);
+        _connection.Open();
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,37 +29,42 @@ public partial class edituser : System.Web.UI.Page
             Response.Redirect("/Login.aspx");
         }
 
-        if (Request.QueryString["name"] == null)
-            Response.Redirect("/Admin.aspx");
-
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        _connection = new SqlConnection(connectionString);
-        _connection.Open();
-
-        Label3.Text = Request.QueryString["name"];
-        Label3.ForeColor = Color.Green;
-
-        SqlDataReader reader = null;
-        string query = "SELECT * FROM AspNetUsers WHERE UserName = " + "'" + Request.QueryString["name"] + "'";
-            
-        try
+        if (!IsPostBack)
         {
-            SqlCommand command = new SqlCommand(query, _connection);
-            reader = command.ExecuteReader();
-            if (reader.Read())
+            if (Request.QueryString["name"] == null)
+                Response.Redirect("/Admin.aspx");
+
+            connect();
+
+            Label3.Text = Request.QueryString["name"];
+            Label3.ForeColor = Color.White;
+            Label3.Font.Size = 16;
+
+            SqlDataReader reader = null;
+            string query = "SELECT * FROM AspNetUsers WHERE UserName = " + "'" + Request.QueryString["name"] + "'";
+
+            try
             {
-                Label1.Text = "Ready fort editing.";
-                TextBox2.Text = Convert.ToString(reader["Email"]);
-                Label2.Text = Convert.ToString(reader["Role"]);
+                SqlCommand command = new SqlCommand(query, _connection);
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Label1.Text = "Editace uživatelů";
+                    TextBox2.Text = Convert.ToString(reader["Email"]);
+                    Label2.Text = Convert.ToString(reader["Role"]);
+                    Label1.Font.Size = 15;
+                    Label1.ForeColor = Color.White;
+                }
+                reader.Close();
             }
-            reader.Close();
-        }
-        catch (Exception exception)
-        {
-            Label1.Text = "Error:<br>" + exception.Message;
-            Label1.ForeColor = Color.Red;
+            catch (Exception exception)
+            {
+                Label1.Text = "Error:<br>" + exception.Message;
+                Label1.ForeColor = Color.Red;
 
+            }
         }
+       
     }
 
     protected void Page_Unload(object sender, EventArgs e)
@@ -64,6 +77,7 @@ public partial class edituser : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+        connect();
         string query = "UPDATE AspNetUsers SET ";
        
         if (CheckBox1.Checked)
@@ -77,6 +91,7 @@ public partial class edituser : System.Web.UI.Page
                 Label3.Text, TextBox2.Text);
         }
         
+
         SqlCommand command = new SqlCommand(query, _connection);
         object result = command.ExecuteScalar();
         Response.Redirect("/Admin.aspx");

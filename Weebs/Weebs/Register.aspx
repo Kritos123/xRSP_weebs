@@ -1,34 +1,54 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+﻿<%@ Page Language="C#" Theme="Register" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link  rel="stylesheet" type="text/css" href="style.css"/>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Registrovat se</title>
 </head>
 <body style="background-color:#4F7D82">
     <form id="form1" runat="server">
-        Zaregistrovat nového uživatele<br />
-        <br />
+       <h1>Zaregistrovat nového uživatele</h1> <br />
+       
         <p>
-            <asp:Literal runat="server" ID="StatusMessage" />
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Literal runat="server" ID="StatusMessage" />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  Text="Hlavní stránka" href="#" class="button"/>
         </p>  
-        <asp:Label ID="Label1" runat="server" Text="Jmeno"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Text="Jmeno" href="#" class="text" ></asp:Label>
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+            ControlToValidate="TextBox1" ValidationGroup="register" ErrorMessage="Nebyl vyplněno uživatelské jméno">
+        </asp:RequiredFieldValidator>
         <br />
+        &nbsp;&nbsp;<br />
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Heslo" href="#" class="text"></asp:Label>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Heslo"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password"></asp:TextBox>
+
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+            ControlToValidate="TextBox2" ValidationGroup="register" ErrorMessage="Nebyl vyplněno heslo ">
+        </asp:RequiredFieldValidator>
+        
         <br />
+        &nbsp;&nbsp;&nbsp;<br />
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server" Text="Heslo znovu" href="#" class="text"></asp:Label>
         <br />
-        <asp:Label ID="Label3" runat="server" Text="Heslo znovu"></asp:Label>
-&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="TextBox3" runat="server" TextMode="Password" href="#" class="text" ForeColor="Black" Height="28px" Width="200px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+            ControlToValidate="TextBox3" ValidationGroup="register" ErrorMessage="Nebyl vyplněno heslo znovu">
+        </asp:RequiredFieldValidator>
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+        <br />
+&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button1" runat="server" Text="Uložit" OnClick="Button1_Click"  ValidationGroup="register" href="#" class="button" />
     </form>
 </body>
 </html>

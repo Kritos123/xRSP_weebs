@@ -74,6 +74,21 @@ public partial class Admin : System.Web.UI.Page
                         Session["name"] = name;
                         Response.Redirect("/Recenzent.aspx");
                     }
+                    else if (sqdt.Rows[i]["Role"].ToString() == "Ctenar")
+                    {
+
+                        string name = Login_textbox.Text.Trim();
+                        Session["name"] = name;
+                        Response.Redirect("/Casopis_read-pro_registrovane.aspx");
+                    }
+                    else if (sqdt.Rows[i]["Role"].ToString() == "Sefredaktor")
+                    {
+
+                        string name = Login_textbox.Text.Trim();
+                        Session["name"] = name;
+                        Response.Redirect("/Sefredaktor.aspx");
+                    }
+
                     else if (sqdt.Rows[i]["Role"].ToString() == "Administrator")
                     {
                         string name = Login_textbox.Text.Trim();
@@ -87,8 +102,8 @@ public partial class Admin : System.Web.UI.Page
         }
         else
         {
-            StatusText.Text = "Spatne jmeno nebo heslo";
-           
+            StatusText.Text = "Špatné jméno nebo heslo";
+            
         }
 
     }
@@ -98,5 +113,10 @@ public partial class Admin : System.Web.UI.Page
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("~/Login.aspx");
+    }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/default.aspx");
     }
 }

@@ -22,6 +22,15 @@ public partial class Admin : System.Web.UI.Page
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         _connection = new SqlConnection(connectionString);
         _connection.Open();
+
+        Label2.Text = Session["name"].ToString();
+        Label2.Font.Bold = true;
+        Label2.Font.Italic = true;
+
+        if (!IsPostBack)
+        {
+            Button1_Click(sender, e);
+        }
     }
 
     protected void Page_Unload(object sender, EventArgs e)
@@ -58,23 +67,28 @@ public partial class Admin : System.Web.UI.Page
                 else
                     cell4.Text = Convert.ToString(reader["Email"]);
                 row.Cells.Add(cell4);
+               
                 HyperLink edit = new HyperLink();
                 edit.Text = "Edit";
                 edit.NavigateUrl = "/edituser.aspx?name="+ cell2.Text;
+                edit.ForeColor = Color.White;
+                edit.Font.Size = 20;
+                edit.Font.Underline = true;
+                
                 TableCell cell5 = new TableCell();
                 cell5.Controls.Add(edit);
                 row.Cells.Add(cell5);
                 HyperLink del = new HyperLink();
                 del.Text = "Delete";
+                del.ForeColor = Color.White;
                 del.NavigateUrl = "/deluser.aspx?name=" + cell2.Text;
+                del.Font.Size = 20;
+                del.Font.Underline = true;
                 TableCell cell6 = new TableCell();
                 cell6.Controls.Add(del);
                 row.Cells.Add(cell6);
                 tabel1.Rows.Add(row);
             }
-
-            
-
         }
         catch (Exception exception)
         {
@@ -87,6 +101,7 @@ public partial class Admin : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         SqlDataReader reader = null;
+        Response.Redirect("Admin_del_edit_user.aspx");
         try
         {
             SqlCommand command = new SqlCommand("SELECT * FROM Clanky", _connection);
@@ -140,5 +155,16 @@ public partial class Admin : System.Web.UI.Page
             Label1.ForeColor = Color.Red;
 
         }
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("~/Login.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("clanek_delete.aspx");
     }
 }

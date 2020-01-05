@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 
 public partial class Autor : System.Web.UI.Page
 {
+  
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -22,7 +24,7 @@ public partial class Autor : System.Web.UI.Page
     private void connect()
     {
         string Name = (string)(Session["name"]);
-        Response.Write(Name);
+     
         if (Name == null)
         {
             Response.Redirect("/Login.aspx");
@@ -33,17 +35,20 @@ public partial class Autor : System.Web.UI.Page
             Session["name"] = null;
             Name = null;
             Response.Redirect("/Login.aspx");
-        }
+        }http://localhost:52439/Casopis_add.aspx
         SqlConnection con = new SqlConnection(@"Data Source=SQL6007.site4now.net;Initial Catalog=DB_A503C7_weebs;User Id=DB_A503C7_weebs_admin;Password=Password1*;");
         con.Open();
         SqlCommand cm = new SqlCommand("Select * from AspNetUsers");
         SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
         DataTable sqdt = new DataTable();
         sqlda.Fill(sqdt);
+        
         for (int i = 0; i < sqdt.Rows.Count; i++)
         {
+          
             if (sqdt.Rows[i]["UserName"].ToString() == Name)
             {
+        
                 if (sqdt.Rows[i]["Role"].ToString() == "Autor")
                 {
                     Bind();
@@ -82,6 +87,7 @@ public partial class Autor : System.Web.UI.Page
     }
     protected void Upload(object sender, EventArgs e)
     {
+        int i = 0;
         string soubor = Path.GetFileName(FileUpload1.PostedFile.FileName);
         string typ = FileUpload1.PostedFile.ContentType;
         using (Stream f_s = FileUpload1.PostedFile.InputStream)
@@ -93,7 +99,7 @@ public partial class Autor : System.Web.UI.Page
                 using (SqlConnection con = new SqlConnection(constr))
                 {
 
-                    string query = "insert into Clanky (Nazev, Typ, Data) values (@Nazev, @Typ, @Data)";
+                    string query = "insert into Clanky (Nazev, Typ, Data, Jmeno) values (@Nazev, @Typ, @Data, @Jmeno)";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
 
@@ -127,15 +133,17 @@ public partial class Autor : System.Web.UI.Page
                         }
 
 
-                        cmd.CommandText = "insert into Clanky (Nazev, Typ, Data, Verze) values (@Nazev, @Typ, @Data, @Verze)";
+                        cmd.CommandText = "insert into Clanky (Nazev, Typ, Data, Verze, Jmeno) values (@Nazev, @Typ, @Data, @Verze, @Jmeno)";
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@Nazev", soubor);
                         cmd.Parameters.AddWithValue("@Typ", typ);
                         cmd.Parameters.AddWithValue("@Data", bytes);
                         cmd.Parameters.AddWithValue("@Verze", number);
+                        cmd.Parameters.AddWithValue("@Jmeno", Session["name"]);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
+                        Session["zapis"] = ++i;
                     }
                 }
             }
@@ -173,7 +181,7 @@ public partial class Autor : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = typ;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor + autor + verze); // ----------
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + soubor); // ----------
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
@@ -188,5 +196,44 @@ public partial class Autor : System.Web.UI.Page
         var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
         authenticationManager.SignOut();
         Response.Redirect("/Login.aspx");
+    }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        int c = 0;
+        string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        SqlConnection con = new SqlConnection(constr);
+        SqlCommand cmd = new SqlCommand();
+        SqlCommand cm = new SqlCommand("Select * from Clanky");
+        SqlDataAdapter sqlda = new SqlDataAdapter(cm.CommandText, con);
+        DataTable sqdt = new DataTable();
+        sqlda.Fill(sqdt);
+        for (int i = 0; i < sqdt.Rows.Count; i++)
+        {
+            if (sqdt.Rows[i]["Nazev"].ToString() == TextBox1.Text)
+            {
+                cmd.CommandText = "insert into Clanky_Stiznosti (Nazev_stiznosti, Stiznost, Nazev) values (@Nazev_stiznosti, @Stiznost, @Nazev)";
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@Nazev_stiznosti", TextBox2.Text);
+                cmd.Parameters.AddWithValue("@Stiznost", TextBox3.Text);
+                cmd.Parameters.AddWithValue("@Nazev", TextBox1.Text);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Response.Write("Stiznost ulozena");
+                c++;
+                break;
+            }
+            else 
+            {
+                
+            }
+        }
+        if(c==0)
+        Response.Write("Neexistujici clanek");
+    }
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }  
